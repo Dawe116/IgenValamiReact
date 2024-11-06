@@ -10,7 +10,8 @@ export const App=()=> {
   useEffect(() => {
     fetch('https://localhost:7231/' + tipus)
     .then((res) => (res.ok ? res.json() : []))
-    .then(tartalom => setItems(tartalom));
+    .then(tartalom => setItems(tartalom))
+    .then(console.log);
   }, [tipus]);
 
   return (
@@ -18,17 +19,16 @@ export const App=()=> {
       <div className='row m-5 border p-5'>
         <FormKomponens setTipus={setTipus} />
         <ListaKomponens elemek ={items} />
-
       </div>
     </div>
   );
 }
 
 
-const FormKomponens = ({setTipus}) => {
+const FormKomponens = ({setTipus}) => (
   <form
   className='w-100'
-  onSubmit={e => {
+  onSubmit={(e) => {
     e.preventDefault();
       setTipus(e.target.contentType.value);
   }}>
@@ -39,7 +39,7 @@ const FormKomponens = ({setTipus}) => {
     </select>
     <button className='btn btn-primary' type='submit'>Kattints!</button>
   </form>
-};
+);
 
 const ListaKomponens = ({elemek}) => (
   <ul>
